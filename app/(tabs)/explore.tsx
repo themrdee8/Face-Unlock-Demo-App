@@ -1,25 +1,30 @@
-import { StyleSheet, Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TabTwoScreen() {
+  const router = useRouter();
+  const logout = () => router.push("/")
+
   return (
     <SafeAreaView>
-      <View>
-        <Text>Logout</Text>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={logout}>
+          <Text style={styles.textStyle}>Logout</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: "#808080",
-    bottom: -90,
-    left: -35,
-    position: "absolute",
+  container: {
+    padding: 12,
+    marginLeft: 24,
+    marginVertical: 34
   },
-  titleContainer: {
-    flexDirection: "row",
-    gap: 8,
+  textStyle: {
+    fontSize: 20,
+    fontWeight: "600"
   },
 });
