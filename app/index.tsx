@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 //Register
 async function registerFace(base64Image: string) {
@@ -91,7 +92,7 @@ export default function HomeScreen() {
         return;
       }
       const response = await registerFace(photo.base64);
-      Alert.alert("Register", response.message);
+      Alert.alert("Registration", response.message);
 
       if (response.success) router.push("/(tabs)/InfoScreen");
     } catch (error) {
@@ -114,7 +115,7 @@ export default function HomeScreen() {
       }
 
       const response = await verifyFace(photo.base64);
-      Alert.alert("Verify", response.message);
+      Alert.alert("Verification", response.message);
 
       if (response.success) router.push("/(tabs)/InfoScreen");
     } catch (error) {
@@ -164,8 +165,8 @@ export default function HomeScreen() {
           )}
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-          <Text style={styles.buttonText}>Switch Camera</Text>
+        <TouchableOpacity style={styles.iconButton} onPress={toggleCameraType}>
+          <Ionicons name="camera-reverse-outline" size={20} color="#fff" />
         </TouchableOpacity>
       </View>
     </View>
@@ -187,7 +188,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 14,
     marginBottom: 16,
-    marginHorizontal: 6,
   },
   buttonsContainer: {
     flexDirection: "row",
@@ -200,4 +200,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "600",
   },
+  iconButton: {
+    backgroundColor: "grey",
+  padding: 12,
+  borderRadius: 50,
+  marginBottom: 14,
+  alignItems: "center"
+  }
 });
