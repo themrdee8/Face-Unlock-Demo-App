@@ -16,17 +16,19 @@ export default function TabLayout() {
         headerShown: false,
         tabBarButton: HapticTab,
       }}>
-        <Tabs.Screen
-          name="faceUnlock"
-          options={{
-            title: 'Face Unlock',
-            tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-          }}
-        />
-        <Tabs.Screen
+        {/* <Tabs.Screen
           name="index"
           options={{
-            title: 'Home',
+            title: 'Face Unlock',
+            tabBarStyle: {display: "none"},
+            tabBarButton: () => null,
+            tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          }}
+        /> */}
+        <Tabs.Screen
+          name="InfoScreen"
+          options={{
+            title: 'Personal Information',
             tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
           }}
         />
