@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CameraView, useCameraPermissions } from "expo-camera";
+import { CameraView, useCameraPermissions, CameraType } from "expo-camera";
 import { useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -45,6 +45,7 @@ export default function HomeScreen() {
   const [isCameraReady, setIsCameraReady] = useState(false);
   const [isCapturing, setIsCapturing] = useState(false);
   const cameraRef = useRef<CameraView>(null);
+  const [cameraType, setCameraType] = useState<"front" | "back">("front");
   const router = useRouter();
 
   //Asks for permission on mount
@@ -75,19 +76,9 @@ export default function HomeScreen() {
     );
   }
 
-  //   const handleCapture = async () => {
-  //     if (!cameraRef.current) return;
-  //     setIsCapturing(true);
-  //     try {
-  //       const photo = await cameraRef.current?.takePictureAsync();
-  //       console.log("Captured photo:", photo.uri);
-  //       //later: send photo.uri to backend for verification
-  //     } catch (error) {
-  //       console.error("Error capturing image:", error);
-  //     } finally {
-  //       setIsCapturing(false);
-  //     }
-  //   };
+  const toggleCameraType = () => {
+    setCameraType((previous) => (previous === "front" ? "back" : "front"))
+  }
 
   const handleRegister = async () => {
     if (!cameraRef.current) return;
@@ -102,7 +93,7 @@ export default function HomeScreen() {
       const response = await registerFace(photo.base64);
       Alert.alert("Register", response.message);
 
-      if (response.success) router.push("/(tabs)/InfoScreen")
+      if (response.success) router.push("/(tabs)/InfoScreen");
     } catch (error) {
       console.error(error);
       Alert.alert("Error", "Failed to register face");
@@ -125,7 +116,7 @@ export default function HomeScreen() {
       const response = await verifyFace(photo.base64);
       Alert.alert("Verify", response.message);
 
-      if (response.success) router.push("/(tabs)/InfoScreen")
+      if (response.success) router.push("/(tabs)/InfoScreen");
     } catch (error) {
       console.error(error);
       Alert.alert("Error", "Failed to verify face");
@@ -139,9 +130,10 @@ export default function HomeScreen() {
       <CameraView
         style={styles.camera}
         ref={cameraRef}
+        facing={cameraType}
         onCameraReady={() => setIsCameraReady(true)}
       />
-      <View style={styles.buttonRow}>
+      <View style={styles.buttonsContainer}>
         <TouchableOpacity
           style={[
             styles.button,
@@ -171,6 +163,10 @@ export default function HomeScreen() {
             <Text style={styles.buttonText}>Face Unlock</Text>
           )}
         </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+          <Text style={styles.buttonText}>Switch Camera</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -190,19 +186,18 @@ const styles = StyleSheet.create({
     padding: 12,
     alignItems: "center",
     borderRadius: 14,
-    marginBottom: 16
+    marginBottom: 16,
+    marginHorizontal: 6
   },
-  buttonRow: {
+  buttonsContainer: {
     flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%",
-
-    backgroundColor: "#fff",
-    padding: 16,
+    justifyContent: "space-evenly",
+    padding: 20,
+    backgroundColor: '#fff'
   },
   buttonText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "600",
   },
 });
