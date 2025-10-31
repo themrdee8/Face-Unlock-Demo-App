@@ -5,7 +5,7 @@ export default function TabTwoScreen() {
   return (
     <SafeAreaView>
       <View>
-        <Text>Logout</Text>
+        <Text>Face Unlock</Text>
       </View>
     </SafeAreaView>
   );
