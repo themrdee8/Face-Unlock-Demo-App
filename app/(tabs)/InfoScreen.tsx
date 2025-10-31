@@ -4,35 +4,32 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function HomeScreen() {
   return (
     <SafeAreaView>
-      <View>
-        <Text>Welcome To Face Unlock</Text>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Welcome To Face Unlock</Text>
       </View>
-      <View>
-        <Text>Your Personal Information</Text>
-        <Text>Name: Lewis Hamilton</Text>
-        <Text>Age: 40</Text>
-        <Text>Height: 5&apos;11</Text>
-        <Text>Home: Monaco</Text>
+      <View style={styles.personal}>
+        <Text style={styles.personalText}>Your Personal Information</Text>
+        <Text style={styles.personalText}>Name: Lewis Hamilton</Text>
+        <Text style={styles.personalText}>Age: 40</Text>
+        <Text style={styles.personalText}>Height: 5&apos;11</Text>
+        <Text style={styles.personalText}>Home: Monaco</Text>
       </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
+  header: {
+    paddingHorizontal: 12,
+    paddingTop: 12,
   },
-  stepContainer: {
-    gap: 8,
+  headerText: { fontSize: 30, fontWeight: "600" },
+  personal: {
+    marginLeft: 24,
+    marginVertical: 34,
+  },
+  personalText: {
     marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
+    fontSize: 15,
   },
 });

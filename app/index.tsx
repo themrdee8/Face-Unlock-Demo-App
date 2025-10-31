@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CameraView, useCameraPermissions, CameraType } from "expo-camera";
+import { CameraView, useCameraPermissions } from "expo-camera";
 import { useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -77,8 +77,8 @@ export default function HomeScreen() {
   }
 
   const toggleCameraType = () => {
-    setCameraType((previous) => (previous === "front" ? "back" : "front"))
-  }
+    setCameraType((previous) => (previous === "front" ? "back" : "front"));
+  };
 
   const handleRegister = async () => {
     if (!cameraRef.current) return;
@@ -187,13 +187,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 14,
     marginBottom: 16,
-    marginHorizontal: 6
+    marginHorizontal: 6,
   },
   buttonsContainer: {
     flexDirection: "row",
     justifyContent: "space-evenly",
     padding: 20,
-    backgroundColor: '#fff'
+    backgroundColor: "#fff",
   },
   buttonText: {
     color: "#fff",
